@@ -18,6 +18,17 @@ def get_reference_scores(site_floors, reference_submission):
     
   return reference_scores
 
+
+# multiple_floors_train_predict 函数负责训练和预测每个场地内楼层的非参数WiFi模型。它接受多个参数来控制训练和预测过程，如配置字典、数据以及文件和文件夹的路径。
+
+# 该函数首先从给定数据中识别场地和楼层信息。如果 debug_floor 参数不为 None，则只针对指定楼层进行操作。然后，该函数使用 get_reference_scores 函数（在代码片段中未提供）为每个楼层获取参考分数。
+
+# 该函数使用多进程来并行化每个楼层的训练和预测过程，加快整个过程。如果 use_multiprocessing 设置为 True，函数将创建一个多进程池并将 floor_train_predict 函数（在代码片段中未提供）应用于每个楼层。然后收集并将结果作为 all_outputs 返回。
+
+# 如果 use_multiprocessing 设置为 False，函数将遍历楼层并顺序调用 floor_train_predict 函数，将结果追加到 all_outputs 列表中。
+
+# 总之，multiple_floors_train_predict 函数通过并行（如果启用了多进程）或顺序训练和预测每个楼层的非参数WiFi模型。它返回一个结果列表，其中包含每个楼层的预测和其他相关信息。
+
 def multiple_floors_train_predict(
     config, df, debug_floor, reference_submission, use_multiprocessing,
     models_group_name, mode, holdout_df, test_floors, recompute_grouped_data,

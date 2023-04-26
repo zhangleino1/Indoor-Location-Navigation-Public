@@ -168,3 +168,21 @@ def run(mode="test", consider_multiprocessing=True, overwrite_output=False):
     
     holdout_unweighted = np.sqrt(preds_df.squared_error.values).mean()
     print(f"Holdout unweighted aggregate loss: {holdout_unweighted:.2f}")
+
+# 这段代码的主要思想是使用一种基于实例的非参数模型，通过对训练数据中所有路径点的后验进行近似来预测一个建筑物内的位置。这种方法简单且不需要优化，不需要做出强烈的分布假设。
+
+# 操作步骤如下：
+
+# 导入所需的库。
+# 定义运行函数 run()，接受参数：mode、consider_multiprocessing、overwrite_output。
+# 设置配置参数，如训练数据过滤条件、权重衰减、距离计算惩罚等。
+# 根据需要设置调试参数，例如 debug_floor 和 debug_fn。
+# 读取数据文件（如 summary_path, stratified_holdout_path, leaderboard_types_path 等）。
+# 判断是否需要存储完整的 Wi-Fi 预测结果。
+# 如果需要，在测试模式下将测试楼层打乱。
+# 如果设置了 debug_fn 或 debug_floor，禁用多进程。
+# 调用 non_parametric_wifi_utils.multiple_floors_train_predict() 函数对各个楼层进行训练和预测。
+# 从各个楼层的输出中提取测试预测、验证预测、所有 Wi-Fi 预测和完整 Wi-Fi 预测。
+# 如果需要，将完整的 Wi-Fi 预测存储为 pickle 文件。
+# 如果处于测试模式，将预测结果转换为提交格式并保存为 CSV 文件。
+# 如果未设置 debug_floor，计算平均验证误差、未加权的 Holdout 聚合损失，并将验证预测保存为 CSV 文件。如果需要，还可以将所有 Wi-Fi 预测保存为 CSV 文件。
