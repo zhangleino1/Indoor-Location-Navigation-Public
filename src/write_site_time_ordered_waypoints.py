@@ -176,3 +176,27 @@ def run():
         combined_all_wifi_path = combined_all_wifi_folder / site / text_level / (
           'all_wifi.csv')
         combined_all_wifi_floor.to_csv(combined_all_wifi_path, index=False)
+
+
+# 导入必要的库（numpy、pandas、pathlib 和 pickle）。
+# 导入 utils 模块。
+# 定义 run() 函数。
+# 打印 "Summarizing all waypoint locations"。
+# 设置 only_process_test_sites 和 write_all_wifi_data 标志。
+# 获取数据文件夹路径，并定义相关文件的路径。
+# 如果 combined_waypoints_path 文件已存在，则退出函数。
+# 从数据文件夹中读取文件摘要和分层抽样保留文件。
+# 初始化空列表，用于存储所有航点、训练Wi-Fi时间、测试Wi-Fi时间和Wi-Fi数据。
+# 遍历所有文件路径，并逐个比较 parquet 和 pickle 文件：
+# a. 打印当前轨迹的序号和总数。
+# b. 如果 only_process_test_sites 或 df.num_wifi[i] 大于0，则加载pickle文件中的轨迹。
+# c. 如果轨迹的模式不是 'test'，提取航点数据并添加元数据。
+# d. 添加航点类型。
+# e. 计算航点的 Wi-Fi 时间。
+# f. 如果轨迹的模式不是 'test'，添加列并重新排序列。
+# g. 将航点追加到列表 all_waypoints。
+# h. 如果 write_all_wifi_data 为 True，提取 Wi-Fi 数据并添加元数据。
+# i. 将 Wi-Fi 数据追加到列表 all_wifi_data。
+# j. 计算 Wi-Fi 时间并根据轨迹模式（测试或训练）追加到相应的列表中。
+# 将所有航点合并到一个pandas DataFrame中并排序，然后将其保存到CSV文件中。
+# 如果 write_all_wifi_data 为 True，将所有Wi-Fi数据合并到一个pandas DataFrame中并排序。然后遍历站点和楼层，将Wi-Fi数据保存到CSV文件中。

@@ -191,3 +191,16 @@ def run(mode):
     uncertainty_path = model_folder / 'predictions' / (
       'uncertainty - ' + predictions_ext)
     uncertainties.to_csv(uncertainty_path, index=False)
+
+
+#     此脚本计算数据集中未见过轨迹的传感器不确定性。它执行以下操作：
+
+# 导入必要的库（numpy 和 pandas）和实用程序模块。
+# 定义一个接受单个参数的函数，该参数可以是“有效”或“测试”。runmode
+# 设置一系列文件路径，并根据模式从各种 CSV 文件中读取数据。
+# 计算每个数据点的距离和角度不确定性，并根据阈值对预测的距离和角度应用校正。
+# 计算原始距离预测和校正距离预测以及相对移动预测的平均绝对误差 （MAE）。
+# 计算改进的距离预测的比例和不确定性之间的相关性。
+# 绘制预测距离不确定性与实际距离不确定性的散点图。
+# 如果设置为 True，则将不确定性数据保存到新的 CSV 文件中。save_uncertainties
+# 您可以使用此脚本处理传感器数据，根据距离和角度不确定性应用校正，以及评估预测中的改进。

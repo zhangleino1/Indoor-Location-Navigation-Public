@@ -225,3 +225,9 @@ def run(overwrite_summary=False):
   #       df.loc[i, 'text_level'] = text_level
   
   df.to_csv(summary_path, index=False)
+# 这段代码的主要思路是从包含室内定位数据的训练和测试数据集中提取元数据。数据集包含带有传感器读
+# 数（如加速度计、陀螺仪、磁场、Wi-Fi和蓝牙）和航点位置的数据文件。脚本处理每个文件，提取诸如站点ID、开始和结束时间、传感器读数数量、Wi-Fi和蓝牙读数数量等信息。然后，将这些元数据保存到名为file_summary.csv的CSV文件中。
+# 脚本中的主要函数是get_file_summary()，它接受一个文件路径和其他参数来处理每个文件并返回提取的元数据。
+# 这个函数在run()函数中使用，run()函数遍历"train"和"test"文件夹中的所有数据文件，并为每个文件调用get_file_summary()。
+# run()函数然后将元数据组装成一个DataFrame，并将其保存为CSV文件。
+# 脚本还具有避免在摘要文件已存在且overwrite_summary标志设置为False时重新处理元数据的机制。

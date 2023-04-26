@@ -219,3 +219,23 @@ def run():
   
   with open(device_id_path, 'wb') as handle:
     pickle.dump(combined_device_ids, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+# 这段代码的主要目的是为每个文件(fn)推断设备ID。主要操作步骤如下：
+
+# 导入所需的库，例如numpy, pandas和pickle。
+# 定义run()函数。
+# 设置一些初始参数，如only_process_test_sites, signature_dist_threshold和dist_scaler。
+# 定义传感器数据的列名sig_cols。
+# 加载数据文件夹，传感器文件夹，文件摘要路径，设备ID路径等。
+# 读取文件摘要数据并根据需要对其进行预处理。
+# 加载传感器数据。
+# 初始化一些变量，如device_ids, device_ids_ordered, active_device_signatures, act_sig_recent_ids，next_signature_id和dev_stats。
+# 遍历所有文件，分析传感器数据，提取设备特征，并将其与已知的设备特征进行比较。
+# 如果找到匹配的设备特征，将设备ID与文件名关联起来；如果没有找到匹配的特征，则为新设备创建新的设备ID。
+# 更新活跃设备签名列表。
+# 将设备ID和相关数据保存到一个数据框dev_stats_df中。
+# 基于时间、传感器观察间的平均时间和站点ID将设备ID连接起来。
+# 将设备ID合并到一个字典combined_device_ids中。
+# 将推断出的设备ID存储到pickle文件中。
+# 这段代码通过分析传感器数据，提取设备特征，并将其与已知的设备特征进行比较，从而为每个文件(fn)推断设备ID。

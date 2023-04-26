@@ -267,3 +267,12 @@ def run(only_process_test_sites=True, overwrite_existing_processed=False,
             sample_sub_fns,
             sample_sub_times,
         )
+# 这部分代码的主要思路是将原始室内定位数据从Parquet格式转换为Pickle格式，并对数据进行预处理。该代码处理每个传感器数据（如加速度计、陀螺仪、磁场计、Wi-Fi和蓝牙信标等），并将它们整合到一个Pickle文件中。同时，该代码还支持对训练数据进行Wi-Fi轨迹插值操作。
+
+# 首先，该代码定义了一个名为reshape_parquet的函数，用于处理单个Parquet文件。这个函数接受一个Parquet文件路径和其他参数，从Parquet文件中提取数据，将数据整理成所需的格式，并将结果保存为一个Pickle文件。具体地说，函数会处理共享时间戳的数据（如加速度计、陀螺仪、磁场计等），并将它们组合成一个单独的DataFrame。同时，Wi-Fi和蓝牙信标数据也会被提取并存储为单独的DataFrame。此外，如果存在航点数据，它们也会被提取并存储为一个DataFrame。
+
+# 在处理完每个Parquet文件后，如果输入数据是训练数据，将会执行Wi-Fi轨迹插值。插值后的Wi-Fi轨迹可以选择保存为单独的CSV文件。最后，将所有处理后的数据保存为Pickle文件。
+
+# run函数是整个脚本的主要入口，它会遍历所有的数据文件，为每个文件调用reshape_parquet函数。在处理数据之前，run函数会检查是否已存在处理后的数据文件，以避免重复处理。此外，还可以通过设置only_process_test_sites参数来仅处理测试数据集，以及通过设置overwrite_existing_processed参数来选择覆盖已经处理过的数据。
+
+# 总之，这部分代码的主要思路是从原始Parquet格式数据中提取和预处理室内定位数据，并将处理后的数据保存为Pickle格式以便后续使用。同时，代码还支持对训练数据的Wi-Fi轨迹进行插值处理。

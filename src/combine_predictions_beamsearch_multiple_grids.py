@@ -262,3 +262,20 @@ def run(mode, strategy_id):
         extended_save_ext = save_ext + ' - extended'
         extended_save_path = storage_folder / (extended_save_ext + '.csv')
         submission_extended.to_csv(extended_save_path, index=False)
+
+# 这段代码的主要目的是融合不同来源的预测数据，以产生更准确的最终预测。下面是代码的逐段解释：
+
+# 导入所需库，如datetime、numpy、pandas和pathlib等。
+# 定义run函数，它接受两个参数：mode（用于指定是对验证集还是测试集进行操作）和strategy_id（用于指定融合策略）。
+# 根据传入的mode和strategy_id参数设定不同的阈值和参数。
+# 定义文件路径，加载基线数据和其他来源数据。
+# 定义一个名为angles_close的函数，用于检查两个角度是否接近。
+# 初始化结果列表，并对每个文件名（fn）进行操作：
+# a. 提取基线预测和其他来源的预测。
+# b. 计算基线惩罚值和其他来源的惩罚值。
+# c. 计算惩罚比率和偏置惩罚比率。
+# d. 根据阈值和策略确定是否替换基线预测。
+# e. 保存结果。
+# 将结果转换为DataFrame。
+# 根据运行模式（验证或测试）保存和输出结果。
+# 总之，这段代码的核心思想是通过比较基线预测和其他来源预测的惩罚值来确定是否替换基线预测。替换后的预测将被保存和输出，以提高预测的准确性。
